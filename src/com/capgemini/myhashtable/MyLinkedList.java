@@ -24,6 +24,20 @@ public class MyLinkedList<K, V> {
 		}
 	}
 
+	// Method to add to top
+	public void add(INode myNode) {
+		if (this.tail == null) {
+			this.tail = myNode;
+		}
+		if (this.head == null) {
+			this.head = myNode;
+		} else {
+			INode tempNode = this.head;
+			this.head = myNode;
+			this.head.setNext(tempNode);
+		}
+	}
+
 	// Search element and return node
 	public INode search(K search) {
 		INode tempNode = head;
