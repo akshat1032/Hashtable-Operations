@@ -13,7 +13,7 @@ public class MyLinkedHashMap<K, V> {
 		this.myBucketArray = new ArrayList<>(bucketSize);
 
 		// Creating empty linked list
-		for (int index = 0 ; index < bucketSize ; index ++) {
+		for (int index = 0; index < bucketSize; index++) {
 			this.myBucketArray.add(null);
 		}
 	}
@@ -43,7 +43,6 @@ public class MyLinkedHashMap<K, V> {
 		MyLinkedList<K, V> myLinkedList = this.myBucketArray.get(index);
 		if (myLinkedList == null) {
 			myLinkedList = new MyLinkedList<>();
-			MyMapNode<K, V> myMapNode = new MyMapNode<>(key, value);
 			this.myBucketArray.set(index, myLinkedList);
 		}
 		MyMapNode<K, V> foundKey = (MyMapNode<K, V>) myLinkedList.search(key);
@@ -58,5 +57,21 @@ public class MyLinkedHashMap<K, V> {
 	@Override
 	public String toString() {
 		return "MyLinkedHashMap List {" + myBucketArray + "}";
+	}
+
+	public MyMapNode remove(K key) {
+		int index = this.getBucketIndex(key);
+		MyLinkedList<K, V> myLinkedList = this.myBucketArray.get(index);
+		if (myLinkedList == null) {
+			return null;
+		} else {
+			MyMapNode<K, V> foundKey = (MyMapNode<K, V>) myLinkedList.search(key);
+			if (foundKey == null) {
+				return null;
+			} else {
+				myLinkedList.delete(foundKey);
+				return foundKey;
+			}
+		}
 	}
 }

@@ -50,6 +50,41 @@ public class MyLinkedList<K, V> {
 		return null;
 	}
 
+	// Delete first element of linked list
+	public INode pop() {
+		INode tempNode = this.head;
+		this.head = head.getNext();
+		return tempNode;
+	}
+
+	// Delete last element of linked list
+	public void popLast() {
+		INode tempNode = head;
+		while (tempNode.getNext().getNext() != null) {
+			tempNode = tempNode.getNext();
+		}
+		this.tail = tempNode;
+		tempNode.setNext(null);
+	}
+
+	// Delete a node
+	public void delete(INode nodeToDelete) {
+		if (nodeToDelete.equals(this.head)) {
+			this.pop();
+		}
+		if (nodeToDelete.equals(this.tail)) {
+			this.popLast();
+		} else {
+			INode tempNode = head;
+			while (tempNode.getNext() != nodeToDelete) {
+				tempNode = tempNode.getNext();
+			}
+			tempNode.setNext(nodeToDelete.getNext());
+			nodeToDelete.setNext(null);
+		}
+
+	}
+
 	@Override
 	public String toString() {
 		return "MyLinkedList {" + head + "}";
